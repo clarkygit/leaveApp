@@ -1,10 +1,17 @@
 import {Link, useNavigate } from "react-router-dom"
+import { userContext } from '../../App.jsx'
+import { useContext, useState } from "react";
 
 export default function Login(){
     const navigate = useNavigate();
+    const {saveUser} = useContext(userContext);
+
+    const [enteredName, setEnteredName] = useState(null);
 
     const loginSubmit = (e) =>{
         e.preventDefault();
+        saveUser(enteredName);
+        console.log(`User ${enteredName} was submitted`);
         navigate("/dashboard");
     }
 
@@ -22,9 +29,9 @@ export default function Login(){
                             <div>
                                 <div class="mt-2.5">
                                     <input
-                                        type="email"
+                                        type="text"
                                         name="username"
-                                        id="username"
+                                        onChange={(e) => {setEnteredName(e.target.value)}}
                                         placeholder="Username"
                                         class="block w-full p-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 focus:outline-none focus:bg-white caret-blue-600"
                                     />
@@ -35,8 +42,7 @@ export default function Login(){
                                 <div class="mt-2.5">
                                     <input
                                         type="text"
-                                        name=""
-                                        id="password"
+                                        name="password"
                                         placeholder="Password"
                                         class="block w-full p-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 focus:outline-none focus:bg-white caret-blue-600"
                                     />

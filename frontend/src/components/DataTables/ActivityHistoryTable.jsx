@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import MuiTable from "./MuiTable";
-import { leaveHistory } from "../Data/DataPool";
 
 export default function ActivityHistoryTable(){
     const columns = [
@@ -77,9 +75,10 @@ export default function ActivityHistoryTable(){
 
     const [rows, setRows] = useState([]);
 
+    {/*
     useEffect(() => {
         axios
-        .get("http://localhost:5000/api/leaves")
+        .get("/api/leaves")
         .then((res) => {
             const formattedRows = res.data.map((leave) => ({
                 id: leave._id,
@@ -94,6 +93,7 @@ export default function ActivityHistoryTable(){
         })
         .catch((err) => console.error("Error fetching leaves:", err));
     }, []);
+    */}
 
     return(
         <>

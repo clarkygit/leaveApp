@@ -1,17 +1,18 @@
 import { useContext, useState } from 'react';
 import { modalContext } from './Layout'
-import api from '../api/axios';
-
+import { userContext } from '../App';
 
   export default function NewApplication() {
     const {closeModal} = useContext(modalContext);
+    const user = useContext(userContext);
 
     //USESTATE ARRAY FOR LEAVE INFO
     const [leaveInfo, setLeaveInfo] = useState({
+      user: user,
       leaveType: '',
       leaveStartDate: '',
       leaveEndDate: '',
-      comment: '',
+      comments: '',
       status: 'Pending',
     });
 
@@ -26,8 +27,8 @@ import api from '../api/axios';
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-        await api.post('/leaves', leaveInfo);
-        setLeaveInfo({ leaveType: '', startDate: '', endDate: '', comment: '' });
+        await app.post('/api/leaves', leaveInfo);
+        setLeaveInfo({ leaveType: '', startDate: '', endDate: '', comments: '' });
         console.log("Sucess")
         closeModal();
         //onAdded(); // Notify parent to refresh table
