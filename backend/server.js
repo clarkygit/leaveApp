@@ -1,10 +1,12 @@
 import express from "express";
+import cors from 'cors';
 import dotenv from "dotenv";
 import { ConnectDB } from "./config/database.js"
 import LeaveCollection from "./models/leaves.model.js";
 
 dotenv.config(); //Allows usage of ENV variables such as PORT and MONGO_URI
 const app = express();
+app.use(cors({ origin: MONGO_URI }));
 app.use(express.json()); //Allows acceptance of JSON data from post's req.body
 
 //GET API

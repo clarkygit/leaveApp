@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
-const leavesSchema = new mongoose.Schema({
+const leavesSchema = new mongoose.Schema(
+    {
     user: {type: String, required:true},
     leaveId: {type: Number, required: true},
     leaveType: {type: String, required: true},
@@ -12,9 +13,11 @@ const leavesSchema = new mongoose.Schema({
         enum: ['Pending Approval', 'Approved', 'Declined', 'Cancelled', 'Completed'],
         default: 'Pending Approval',
         },
-},
-{timestamps: true} //Includes Created & Updated Timestamp
+    },
+    {
+        timestamps: true //Includes Created & Updated Timestamp
+    }
 );
 
 const LeaveCollection = mongoose.model('LeaveCollection', leavesSchema);
-export default Leave;
+export default LeaveCollection;

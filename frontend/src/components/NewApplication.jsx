@@ -1,6 +1,9 @@
+import axios from '../api/axios';
 import { useContext, useState } from 'react';
 import { modalContext } from './Layout'
 import { userContext } from '../App';
+
+//const app = express();
 
   export default function NewApplication() {
     const {closeModal} = useContext(modalContext);
@@ -27,7 +30,8 @@ import { userContext } from '../App';
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-        await app.post('/api/leaves', leaveInfo);
+        console.log("Handling submit");
+        await axios.post('/leaves', leaveInfo);
         setLeaveInfo({ leaveType: '', startDate: '', endDate: '', comments: '' });
         console.log("Sucess")
         closeModal();
